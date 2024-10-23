@@ -1,4 +1,4 @@
-model MassSpringDamper
+model spring_damper
   // Parameters
   parameter Real m = 1 "Mass (kg)";
   parameter Real k = 10 "Spring constant (N/m)";
@@ -13,4 +13,4 @@ equation
   m * der(v) = -k * x - d * v;  // Force balance on the mass
   der(x) = v;                   // Velocity is the derivative of position
 
-end MassSpringDamper;
+end spring_damper;
