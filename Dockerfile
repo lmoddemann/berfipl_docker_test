@@ -24,10 +24,10 @@ RUN curl -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-lat
 # Add conda to PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
-RUN git clone https://github.com/lmoddemann/berfipl_docker_test.git /workspace/berfipl_docker
+RUN git clone https://github.com/lmoddemann/berfipl_docker_test.git 
 
 # Set the working directory to your cloned repo
-WORKDIR /workspace/berfipl_docker
+WORKDIR /berfipl_docker_test
 
 # Create conda environment from the environment.yml file (assuming it is in the repo)
 RUN conda env create -f environment.yml
@@ -36,14 +36,15 @@ RUN conda env create -f environment.yml
 RUN echo "source activate myenv" > ~/.bashrc
 ENV PATH /opt/conda/envs/myenv/bin:$PATH
 
-# Install OpenModelica (if needed)
-RUN wget https://bintray.com/openmodelica/packaging/download_file?file_path=openmodelica/1.21.0/OpenModelica-1.21.0-Ubuntu-22.04-x86_64.tar.gz -O openmodelica.tar.gz \
-    && tar -xzf openmodelica.tar.gz \
-    && mv OpenModelica-1.21.0 /opt/openmodelica \
-    && rm openmodelica.tar.gz
+# Install OpenModelica 
+RUN echo "deb https://build.openmodelica.org/apt jammy nightly" | tee /etc/apt/sources.list.d/openmodelica.list \
+    && wget -q https://build.openmodelica.org/apt/openmodelica.asc -O- | apt-key add - \
+    && apt-get update \
+    && apt-get install -y openmodelica
 
 # Set environment variables for OpenModelica
 ENV PATH="/opt/openmodelica/bin:$PATH"
 
 # Define the entrypoint to run your Python script
-ENTRYPOINT ["python3", "your_script.py"]
+# ENTRYPOINT ["python3", "your_script.py"]
+CMD ["omc", "example.mo"]
