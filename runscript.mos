@@ -1,0 +1,7 @@
+omc
+
+# Inside OMC
+loadFile("example.mo");            # Load the model
+simulate(MassSpringDamper);         # Run the simulation
+plot(x);                           # Plot the position (x)
+plot(v);                           # Plot the velocity (v)
