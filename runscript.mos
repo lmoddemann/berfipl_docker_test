@@ -1,7 +1,7 @@
-omc
+print("load process_plant.mo:");
+loadFile("process_plant.mo");
+print("");
 
-# Inside OMC
-loadFile("example.mo");            # Load the model
-simulate(MassSpringDamper);         # Run the simulation
-plot(x);                           # Plot the position (x)
-plot(v);                           # Plot the velocity (v)
+cd("../datasets");
+cd("ds1"); 
+simulate(process_plant, startTime = 0, stopTime=4000, numberOfIntervals=4000, outputFormat="csv", simflags="-maxIntegrationOrder=1");
