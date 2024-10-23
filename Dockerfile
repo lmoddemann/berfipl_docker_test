@@ -29,6 +29,8 @@ RUN git clone https://github.com/lmoddemann/berfipl_docker_test.git
 # Set the working directory to your cloned repo
 WORKDIR /berfipl_docker_test
 
+COPY example.mo .
+
 # Create conda environment from the environment.yml file (assuming it is in the repo)
 RUN conda env create -f environment.yml
 
@@ -45,6 +47,7 @@ RUN echo "deb https://build.openmodelica.org/apt jammy nightly" | tee /etc/apt/s
 # Set environment variables for OpenModelica
 ENV PATH="/opt/openmodelica/bin:$PATH"
 
+RUN chmod +x example.mo
 # Define the entrypoint to run your Python script
 # ENTRYPOINT ["python3", "your_script.py"]
-CMD ["omc", "example.mo"]
+RUN ["omc", "example.mo"]
