@@ -28,7 +28,8 @@ ENV PATH="/opt/conda/bin:$PATH"
 RUN echo "deb https://build.openmodelica.org/apt jammy nightly" | tee /etc/apt/sources.list.d/openmodelica.list \
     && wget -q https://build.openmodelica.org/apt/openmodelica.asc -O- | apt-key add - \
     && apt-get update \
-    && apt-get install -y openmodelica
+    && apt-get install -y openmodelica \
+    && apt-get install -y vim
 
 # Set environment variables for OpenModelica
 ENV PATH="/opt/openmodelica/bin:$PATH"
@@ -50,4 +51,4 @@ ENV PATH /opt/conda/envs/myenv/bin:$PATH
 RUN chmod +x example.mo
 # Define the entrypoint to run your Python script
 # ENTRYPOINT ["python3", "your_script.py"]
-RUN ["omc", "example.mo"]
+CMD ["omc", "example.mo"]
