@@ -13,8 +13,4 @@ equation
   m * der(v) = -k * x - d * v;  // Force balance on the mass
   der(x) = v;                   // Velocity is the derivative of position
 
-  // Initial conditions
-  x(0) = 0; // Initial position
-  v(0) = 0; // Initial velocity
-
 end MassSpringDamper;
