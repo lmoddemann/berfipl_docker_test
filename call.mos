@@ -1,0 +1,3 @@
+print("load example.mo");
+loadFile("example.mo");
+simulate(spring_damper, startTime = 0, stopTime=4000, numberOfIntervals=4000, outputFormat="csv", simflags="-maxIntegrationOrder=1");

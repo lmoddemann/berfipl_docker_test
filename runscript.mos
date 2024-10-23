@@ -1,7 +1,0 @@
-print("load process_plant.mo:");
-loadFile("process_plant.mo");
-print("");
-
-cd("../datasets");
-cd("ds1"); 
-simulate(process_plant, startTime = 0, stopTime=4000, numberOfIntervals=4000, outputFormat="csv", simflags="-maxIntegrationOrder=1");
